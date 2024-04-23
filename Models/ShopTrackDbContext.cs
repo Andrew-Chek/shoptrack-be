@@ -155,6 +155,9 @@ public partial class ShopTrackDbContext : DbContext
             entity.Property(e => e.Username)
                 .HasMaxLength(255)
                 .HasColumnName("username");
+            entity.Property(e => e.Email)
+                .HasMaxLength(255)
+                .HasColumnName("email");
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -24,7 +24,7 @@ namespace shoptrack_be.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public virtual async Task<IActionResult> GetById(int id)
         {
             var item = await _repository.GetByIdAsync(id);
             if (item == null)
@@ -49,26 +49,12 @@ namespace shoptrack_be.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, TModel model)
         {
-            if (id != model.GetId())
-            {
-                return BadRequest();
-            }
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            try
-            {
-                await _repository.UpdateAsync(model);
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            }
-
-            return NoContent();
+            await _repository.UpdateAsync(id, model);
+            return Ok("The entity was updated successfully.");
         }
 
         [HttpDelete("{id}")]
@@ -81,7 +67,7 @@ namespace shoptrack_be.Controllers
             }
 
             await _repository.DeleteAsync(item);
-            return NoContent();
+            return Ok("The entity was deleted successfully.");
         }
     }
 }

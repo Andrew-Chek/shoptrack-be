@@ -23,4 +23,9 @@ public partial class Product: IModel
     {
         return ProductId;
     }
+
+    public string ToString()
+    {
+        return $"Product: {ProductId} {Name} {Description} {Price} {StoreId}";
+    }
 }

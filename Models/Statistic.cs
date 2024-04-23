@@ -19,4 +19,9 @@ public partial class Statistic: IModel
     {
         return StatisticId;
     }
+
+    public string ToString()
+    {
+        return $"Statistic: {StatisticId} {StoreId} {Date} {SoldQuantity}";
+    }
 }

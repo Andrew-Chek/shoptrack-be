@@ -25,4 +25,9 @@ public partial class Store: IModel
     {
         return StoreId;
     }
+
+    public string ToString()
+    {
+        return $"Store: {StoreId} {Name} {Location} {AdministratorId}";
+    }
 }

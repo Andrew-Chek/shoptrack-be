@@ -1,17 +1,15 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using shoptrack_be.Models;
 using shoptrack_be.Repositories;
 
 namespace shoptrack_be;
 public class Startup
 {
-    public Startup()
+
+    public IConfiguration Configuration { get; }
+    public Startup(IConfiguration configuration)
     {
+        Configuration = configuration;
     }
 
     public void ConfigureServices(IServiceCollection services)
@@ -25,6 +23,8 @@ public class Startup
         services.AddScoped<PurchaseRepository>();
         services.AddScoped<ProductRepository>();
         services.AddScoped<UserRepository>();
+        services.AddScoped<IUserService, UserRepository>();
+        services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
         services.AddScoped<StatisticRepository>();
         services.AddScoped<StoreRepository>();
 
@@ -50,6 +50,7 @@ public class Startup
         app.UseRouting();
 
         app.UseAuthorization();
+        app.UseMiddleware<JwtMiddleware>();
 
         app.UseEndpoints(endpoints =>
         {

@@ -12,6 +12,7 @@ public partial class User: IModel
     public string Password { get; set; } = null!;
 
     public string Role { get; set; } = null!;
+    public string Email { get; set; } = null!;
 
     public virtual ICollection<Purchase> Purchases { get; set; } = new List<Purchase>();
 
@@ -20,5 +21,10 @@ public partial class User: IModel
     public int GetId()
     {
         return UserId;
+    }
+
+    public string ToString()
+    {
+        return $"User: {UserId} {Username} {Role} {Email}";
     }
 }

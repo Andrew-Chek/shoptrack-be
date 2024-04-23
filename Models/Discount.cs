@@ -19,4 +19,9 @@ public partial class Discount: IModel
     {
         return DiscountId;
     }
+
+    public string ToString()
+    {
+        return $"Discount: {DiscountId} {StoreId} {Description} {Amount}";
+    }
 }

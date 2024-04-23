@@ -23,4 +23,9 @@ public partial class Purchase: IModel
     {
         return PurchaseId;
     }
+
+    public string ToString()
+    {
+        return $"Purchase: {PurchaseId} {UserId} {ProductId} {PurchaseDate} {Quantity}";
+    }
 }
